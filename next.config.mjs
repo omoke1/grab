@@ -18,6 +18,13 @@ const nextConfig = {
           { key: "Content-Type", value: "application/json; charset=utf-8" },
         ],
       },
+      {
+        source: "/placeholder.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, immutable, no-transform, max-age=300" },
+          { key: "Content-Type", value: "image/jpeg" },
+        ],
+      },
     ]
   },
 }
