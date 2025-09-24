@@ -117,10 +117,10 @@ export function PostTracker() {
   return (
     <div className="space-y-6">
       {/* Post URL Input */}
-      <Card className="neo-border neo-shadow-lg bg-cyan p-6">
-        <h3 className="text-xl font-bold text-black mb-4">Analyze Farcaster Post</h3>
+      <Card className="neo-border neo-shadow-lg bg-cyan p-4 md:p-6">
+        <h3 className="text-lg md:text-xl font-bold text-black mb-3 md:mb-4">Analyze Farcaster Post</h3>
         <div className="space-y-4">
-          <div className="flex gap-2">
+          <div className="flex gap-2 md:gap-3 flex-col md:flex-row">
             <Input
               placeholder="Paste BaseApp/Farcaster post link here..."
               value={postUrl}
@@ -164,7 +164,7 @@ export function PostTracker() {
 
       {/* Loading State */}
       {isAnalyzing && (
-        <Card className="neo-border bg-yellow p-6">
+        <Card className="neo-border bg-yellow p-4 md:p-6">
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-4 border-black border-t-transparent mr-4"></div>
             <span className="text-black font-bold">Fetching mutual follower interactions...</span>
@@ -176,7 +176,7 @@ export function PostTracker() {
       {analytics && !isAnalyzing && (
         <>
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
             <Card className="neo-border bg-coral p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Heart className="w-5 h-5 text-black" />
@@ -215,7 +215,7 @@ export function PostTracker() {
           </div>
 
           {/* Mutual Interactions List */}
-          <Card className="neo-border neo-shadow-lg bg-white p-6">
+          <Card className="neo-border neo-shadow-lg bg-white p-4 md:p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-black">Mutual Follower Interactions</h3>
               <Button

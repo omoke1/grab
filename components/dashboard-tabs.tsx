@@ -19,15 +19,15 @@ export function DashboardTabs() {
   const [activeTab, setActiveTab] = useState("download")
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto px-3 md:px-4">
       {/* Tab Navigation */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-              px-6 py-3 font-bold text-black border-4 border-black rounded-lg
+              px-4 py-2 md:px-6 md:py-3 font-bold text-black border-4 border-black rounded-lg text-sm md:text-base
               transition-all duration-200 hover:translate-x-1 hover:translate-y-1
               hover:shadow-none active:translate-x-2 active:translate-y-2
               ${
@@ -43,7 +43,7 @@ export function DashboardTabs() {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white border-4 border-black rounded-lg p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-white border-4 border-black rounded-lg p-4 md:p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         {activeTab === "download" && (
           <div>
             <h2 className="text-2xl font-bold mb-4 text-black">Video Downloader</h2>

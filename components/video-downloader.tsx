@@ -165,11 +165,11 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
   const recentDownloads = allDownloads ? allDownloads.slice(-5).reverse() : []
 
   return (
-    <Card className="neo-border neo-shadow-lg bg-card p-8">
+    <Card className="neo-border neo-shadow-lg bg-card p-4 md:p-8">
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-black mb-4 text-balance">DOWNLOAD VIDEO</h2>
-          <p className="text-muted-foreground mb-6 text-pretty">
+          <h2 className="text-xl md:text-2xl font-black mb-3 md:mb-4 text-balance">DOWNLOAD VIDEO</h2>
+          <p className="text-muted-foreground mb-4 md:mb-6 text-pretty text-sm md:text-base">
             Pay a small fee ($0.50) to extract and download videos from Farcaster casts as MP4
           </p>
         </div>
@@ -177,7 +177,7 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
         <div className="space-y-4">
           {paymentStep === "input" && (
             <>
-              <div className="flex gap-4">
+              <div className="flex gap-2 md:gap-4 flex-col sm:flex-row">
                 <Input
                   placeholder="https://warpcast.com/username/0x..."
                   value={castUrl}
@@ -204,11 +204,11 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
           )}
 
           {paymentStep === "payment" && (
-            <div className="neo-border bg-white p-6 rounded-lg space-y-4">
+            <div className="neo-border bg-white p-4 md:p-6 rounded-lg space-y-4">
               <h3 className="text-lg font-bold text-black">Choose Payment Method</h3>
               <p className="text-sm text-gray-600 mb-4">Select how you'd like to pay for this download:</p>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <button
                   onClick={() => setSelectedPayment("eth")}
                   className={`neo-border p-4 rounded-lg font-bold transition-all ${
@@ -217,8 +217,8 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
                       : "bg-gray-100 text-black hover:bg-gray-200"
                   }`}
                 >
-                  <div className="text-lg">0.0005 ETH</div>
-                  <div className="text-sm opacity-70">≈ $0.50</div>
+                  <div className="text-lg">~$0.70 ETH</div>
+                  <div className="text-sm opacity-70">Approximate</div>
                 </button>
 
                 <button
@@ -229,12 +229,12 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
                       : "bg-gray-100 text-black hover:bg-gray-200"
                   }`}
                 >
-                  <div className="text-lg">0.50 USDC</div>
+                  <div className="text-lg">0.70 USDC</div>
                   <div className="text-sm opacity-70">Stablecoin</div>
                 </button>
               </div>
 
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-2 md:gap-4 pt-4 flex-col sm:flex-row">
                 <Button
                   onClick={cancelPayment}
                   variant="outline"

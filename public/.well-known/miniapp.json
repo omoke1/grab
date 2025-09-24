@@ -1,5 +1,5 @@
 {
-  "id": "https://your-domain.example", 
+  "id": "https://grab-rust.vercel.app", 
   "name": "Grab",
   "description": "Download videos from Farcaster casts and track usage analytics.",
   "short_name": "Grab",
