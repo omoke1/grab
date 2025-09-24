@@ -129,10 +129,10 @@ export function HistoryDashboard() {
       : 0
 
   return (
-    <Card className="neo-border neo-shadow-lg bg-card p-8">
+    <Card className="neo-border neo-shadow-lg bg-card p-4 md:p-8">
       <div className="space-y-6">
         {/* Header Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4 md:mb-6">
           <div className="neo-border neo-shadow bg-coral p-4">
             <div className="flex items-center gap-2 mb-2">
               <Download className="w-4 h-4 text-black" />
@@ -167,22 +167,22 @@ export function HistoryDashboard() {
         </div>
 
         {/* Search and Filter */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-3 md:gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Search downloads, creators..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="neo-border bg-white text-black font-medium pl-10"
+              className="neo-border bg-white text-black font-medium pl-10 h-11"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="grid grid-cols-3 md:flex gap-2 w-full md:w-auto">
             <Button
               onClick={() => setFilterStatus("all")}
               variant={filterStatus === "all" ? "default" : "outline"}
-              className={`neo-border font-bold ${
+              className={`w-full md:w-auto neo-border font-bold ${
                 filterStatus === "all" ? "bg-coral text-black hover:bg-yellow" : "bg-white text-black hover:bg-gray-100"
               }`}
             >
@@ -191,7 +191,7 @@ export function HistoryDashboard() {
             <Button
               onClick={() => setFilterStatus("completed")}
               variant={filterStatus === "completed" ? "default" : "outline"}
-              className={`neo-border font-bold ${
+              className={`w-full md:w-auto neo-border font-bold ${
                 filterStatus === "completed"
                   ? "bg-green text-black hover:bg-yellow"
                   : "bg-white text-black hover:bg-gray-100"
@@ -202,7 +202,7 @@ export function HistoryDashboard() {
             <Button
               onClick={() => setFilterStatus("error")}
               variant={filterStatus === "error" ? "default" : "outline"}
-              className={`neo-border font-bold ${
+              className={`w-full md:w-auto neo-border font-bold ${
                 filterStatus === "error"
                   ? "bg-red-500 text-white hover:bg-red-600"
                   : "bg-white text-black hover:bg-gray-100"
@@ -215,17 +215,17 @@ export function HistoryDashboard() {
 
         {/* Download History */}
         <div className="space-y-4">
-          <h3 className="text-lg font-bold">DOWNLOAD HISTORY</h3>
+          <h3 className="text-base md:text-lg font-bold">DOWNLOAD HISTORY</h3>
 
           {filteredHistory.length > 0 ? (
             <div className="space-y-3">
               {filteredHistory.map((download) => (
                 <div key={download.id} className="neo-border bg-secondary p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0 mr-4">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                    <div className="flex-1 min-w-0 md:mr-4 w-full">
                       <div className="flex items-center gap-2 mb-2">
                         {getStatusIcon(download.status)}
-                        <h4 className="font-bold text-sm truncate">{download.title}</h4>
+                        <h4 className="font-bold text-sm truncate max-w-[75vw] md:max-w-none">{download.title}</h4>
                         {download.paymentAmount && (
                           <Badge className="neo-border bg-green text-black font-bold text-xs">
                             {download.paymentAmount}
@@ -234,7 +234,7 @@ export function HistoryDashboard() {
                       </div>
 
                       <div className="space-y-1">
-                        <p className="text-xs text-muted-foreground truncate">{download.url}</p>
+                        <p className="text-xs text-muted-foreground truncate max-w-[80vw] md:max-w-none">{download.url}</p>
 
                         {download.creatorName && (
                           <p className="text-xs font-medium">
@@ -258,7 +258,7 @@ export function HistoryDashboard() {
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-row md:flex-col gap-2 md:items-end">
                       <Button
                         size="sm"
                         variant="outline"
