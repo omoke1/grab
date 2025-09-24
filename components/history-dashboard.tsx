@@ -178,7 +178,7 @@ export function HistoryDashboard() {
             />
           </div>
 
-          <div className="grid grid-cols-3 md:flex gap-2 w-full md:w-auto">
+          <div className="grid grid-cols-3 gap-2 w-full md:w-auto">
             <Button
               onClick={() => setFilterStatus("all")}
               variant={filterStatus === "all" ? "default" : "outline"}

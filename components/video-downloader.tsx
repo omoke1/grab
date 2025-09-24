@@ -196,8 +196,8 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
               </div>
 
               {!isConnected && (
-                <div className="neo-border bg-yellow text-black p-4 rounded-lg">
-                  <p className="font-bold">⚠️ Connect your wallet to download videos</p>
+                <div className="neo-border bg-yellow text-black p-3 md:p-4 rounded-lg">
+                  <p className="font-bold text-sm md:text-base">⚠️ Connect your wallet to download videos</p>
                 </div>
               )}
             </>

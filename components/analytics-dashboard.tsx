@@ -293,21 +293,33 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
           <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">RECENT SESSIONS</h3>
           <div className="space-y-3">
             {analytics.sessions.slice(0, 5).map((session) => (
-              <div key={session.sessionId} className="neo-border bg-secondary p-4 flex items-start md:items-center justify-between gap-2 md:gap-4 flex-col md:flex-row">
-                <div className="w-full">
-                  <div className="flex items-center gap-2 mb-1">
+              <div key={session.sessionId} className="neo-border bg-secondary p-3 md:p-4">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 mb-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="font-medium">{session.startTime.toLocaleDateString()}</span>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="font-medium text-sm md:text-base">{session.startTime.toLocaleDateString()}</span>
+                    <span className="text-xs md:text-sm text-muted-foreground">
                       {session.startTime.toLocaleTimeString()} - {session.endTime?.toLocaleTimeString()}
                     </span>
                   </div>
-                  <div className="flex gap-4 text-sm text-muted-foreground">
-                    <span>{session.duration} min</span>
-                    <span>{session.castsViewed} casts</span>
-                    <span>{session.downloadsCount} downloads</span>
-                    <span>{session.engagementActions || 0} engagements</span>
-                  </div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-xs md:text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {session.duration} min
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Eye className="w-3 h-3" />
+                    {session.castsViewed} casts
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Download className="w-3 h-3" />
+                    {session.downloadsCount} downloads
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <TrendingUp className="w-3 h-3" />
+                    {session.engagementActions || 0} engagements
+                  </span>
                 </div>
               </div>
             ))}
