@@ -31,9 +31,9 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
 
   if (!isConnected) {
     return (
-      <Card className="neo-border neo-shadow-lg bg-card p-8">
-        <h2 className="text-2xl font-black mb-6">USAGE ANALYTICS</h2>
-        <div className="text-center py-12">
+      <Card className="neo-border neo-shadow-lg bg-card p-4 md:p-8">
+        <h2 className="text-xl md:text-2xl font-black mb-4 md:mb-6">USAGE ANALYTICS</h2>
+        <div className="text-center py-8 md:py-12">
           <TrendingUp className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
           <p className="text-muted-foreground mb-4 font-medium">Connect your wallet to track usage analytics</p>
           <Button onClick={onConnect} className="neo-border neo-shadow bg-primary text-primary-foreground font-bold">
@@ -55,10 +55,10 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
   }
 
   return (
-    <Card className="neo-border neo-shadow-lg bg-card p-8">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-black">USAGE ANALYTICS</h2>
-        <div className="flex items-center gap-4">
+    <Card className="neo-border neo-shadow-lg bg-card p-4 md:p-8 overflow-hidden">
+      <div className="flex items-start md:items-center justify-between mb-4 md:mb-6 gap-3 flex-col md:flex-row">
+        <h2 className="text-xl md:text-2xl font-black">USAGE ANALYTICS</h2>
+        <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
           {isTracking && (
             <Badge className="neo-border bg-green text-black font-bold">
               <div className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse" />
@@ -67,7 +67,7 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
           )}
           <Button
             onClick={isTracking ? endSession : startSession}
-            className={`neo-border neo-shadow font-bold ${
+            className={`w-full md:w-auto neo-border neo-shadow font-bold ${
               isTracking ? "bg-coral text-black hover:bg-yellow" : "bg-cyan text-black hover:bg-yellow"
             }`}
           >
@@ -78,9 +78,9 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
 
       {/* Current Session */}
       {currentSession && (
-        <div className="mb-8">
-          <h3 className="text-lg font-bold mb-4">CURRENT SESSION</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mb-6 md:mb-8">
+          <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">CURRENT SESSION</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-4">
             <div className="neo-border neo-shadow bg-cyan p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Clock className="w-4 h-4 text-black" />
@@ -108,9 +108,9 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
         </div>
       )}
 
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">CREATOR INSIGHTS</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="mb-6 md:mb-8">
+        <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">CREATOR INSIGHTS</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {/* Top Interactions */}
           <div className="neo-border neo-shadow bg-secondary p-6">
             <div className="flex items-center gap-2 mb-4">
@@ -187,21 +187,21 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
         </div>
       </div>
 
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">ACTIVITY HEATMAP</h3>
-        <div className="neo-border neo-shadow bg-secondary p-6">
+      <div className="mb-6 md:mb-8">
+        <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">ACTIVITY HEATMAP</h3>
+        <div className="neo-border neo-shadow bg-secondary p-4 md:p-6 overflow-hidden">
           <div className="flex items-center gap-2 mb-4">
             <BarChart3 className="w-5 h-5" />
             <h4 className="font-bold">MOST ACTIVE HOURS</h4>
           </div>
-          <div className="grid grid-cols-12 gap-1 mb-4">
+          <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 gap-1 mb-4">
             {heatmapData.map((hour) => (
               <div key={hour.hour} className="text-center">
                 <div
-                  className={`w-full h-8 rounded border-2 border-black ${getHeatmapIntensity(hour.activity)} mb-1`}
+                  className={`w-full h-6 md:h-8 rounded border-2 border-black ${getHeatmapIntensity(hour.activity)} mb-1`}
                   title={`${hour.label}: ${hour.activity} minutes`}
                 />
-                <span className="text-xs font-bold">{hour.hour}</span>
+                <span className="text-[10px] md:text-xs font-bold">{hour.hour}</span>
               </div>
             ))}
           </div>
@@ -220,9 +220,9 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
       </div>
 
       {/* Daily Stats */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">TODAY</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="mb-6 md:mb-8">
+        <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">TODAY</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           <div className="neo-border neo-shadow bg-secondary p-4">
             <p className="text-sm font-bold text-muted-foreground mb-1">SESSIONS</p>
             <p className="text-xl font-black">{dailyStats.sessions}</p>
@@ -243,9 +243,9 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
       </div>
 
       {/* Weekly Stats */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">THIS WEEK</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="mb-6 md:mb-8">
+        <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">THIS WEEK</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           <div className="neo-border neo-shadow bg-green p-4">
             <p className="text-sm font-bold text-black mb-1">SESSIONS</p>
             <p className="text-xl font-black text-black">{weeklyStats.sessions}</p>
@@ -267,8 +267,8 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
 
       {/* All Time Stats */}
       <div>
-        <h3 className="text-lg font-bold mb-4">ALL TIME</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">ALL TIME</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           <div className="neo-border neo-shadow bg-secondary p-4">
             <p className="text-sm font-bold text-muted-foreground mb-1">TOTAL SESSIONS</p>
             <p className="text-xl font-black">{analytics.totalSessions}</p>
@@ -289,12 +289,12 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
       </div>
 
       {analytics.sessions.length > 0 && (
-        <div className="mt-8">
-          <h3 className="text-lg font-bold mb-4">RECENT SESSIONS</h3>
+        <div className="mt-6 md:mt-8">
+          <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">RECENT SESSIONS</h3>
           <div className="space-y-3">
             {analytics.sessions.slice(0, 5).map((session) => (
-              <div key={session.sessionId} className="neo-border bg-secondary p-4 flex items-center justify-between">
-                <div>
+              <div key={session.sessionId} className="neo-border bg-secondary p-4 flex items-start md:items-center justify-between gap-2 md:gap-4 flex-col md:flex-row">
+                <div className="w-full">
                   <div className="flex items-center gap-2 mb-1">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
                     <span className="font-medium">{session.startTime.toLocaleDateString()}</span>
