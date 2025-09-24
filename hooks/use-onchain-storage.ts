@@ -1,22 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
-// Mock wagmi hooks for preview environment
-const useAccount = () => ({
-  address: "0x1234567890123456789012345678901234567890",
-  isConnected: true,
-})
-
-const useWriteContract = () => ({
-  writeContract: () => {},
-  data: null,
-  isPending: false,
-})
-
-const useWaitForTransactionReceipt = () => ({
-  isLoading: false,
-  isSuccess: false,
-})
+import { useWallet } from "./use-wallet"
 
 interface OnchainRecord {
   id: string
@@ -52,11 +37,7 @@ export function useOnchainStorage() {
   const [records, setRecords] = useState<OnchainRecord[]>([])
   const [isStoring, setIsStoring] = useState(false)
 
-  const { address, isConnected } = useAccount()
-  const { writeContract, data: hash, isPending } = useWriteContract()
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  })
+  const { address, isConnected } = useWallet()
 
   // Store session summary onchain
   const storeSessionSummary = useCallback(
@@ -79,29 +60,20 @@ export function useOnchainStorage() {
 
         setRecords((prev) => [record, ...prev])
 
-        // Simulate onchain transaction for session summary
-        // In a real implementation, this would call a smart contract
-        const mockTxHash = `0x${Math.random().toString(16).substr(2, 64)}`
-
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 3000))
-
-        // Update record with transaction details
+        // TODO: Implement real onchain storage
+        // For now, just mark as confirmed without actual transaction
         setRecords((prev) =>
           prev.map((r) =>
             r.id === record.id
               ? {
                   ...r,
-                  transactionHash: mockTxHash,
-                  blockNumber: Math.floor(Math.random() * 1000000) + 18000000,
-                  gasUsed: (Math.random() * 0.001 + 0.0005).toFixed(6),
                   status: "confirmed" as const,
                 }
               : r,
           ),
         )
 
-        return mockTxHash
+        return "onchain-storage-disabled"
       } catch (error) {
         console.error("Failed to store session summary:", error)
         setRecords((prev) =>
@@ -138,28 +110,20 @@ export function useOnchainStorage() {
 
         setRecords((prev) => [record, ...prev])
 
-        // Simulate onchain transaction for payment receipt
-        const mockTxHash = `0x${Math.random().toString(16).substr(2, 64)}`
-
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-
-        // Update record with transaction details
+        // TODO: Implement real onchain storage
+        // For now, just mark as confirmed without actual transaction
         setRecords((prev) =>
           prev.map((r) =>
             r.id === record.id
               ? {
                   ...r,
-                  transactionHash: mockTxHash,
-                  blockNumber: Math.floor(Math.random() * 1000000) + 18000000,
-                  gasUsed: (Math.random() * 0.002 + 0.001).toFixed(6),
                   status: "confirmed" as const,
                 }
               : r,
           ),
         )
 
-        return mockTxHash
+        return "onchain-storage-disabled"
       } catch (error) {
         console.error("Failed to store payment receipt:", error)
         setRecords((prev) =>
@@ -201,28 +165,20 @@ export function useOnchainStorage() {
 
         setRecords((prev) => [record, ...prev])
 
-        // Simulate file upload and onchain storage
-        const mockTxHash = `0x${Math.random().toString(16).substr(2, 64)}`
-
-        // Simulate upload progress and network delay
-        await new Promise((resolve) => setTimeout(resolve, 4000))
-
-        // Update record with transaction details
+        // TODO: Implement real onchain storage
+        // For now, just mark as confirmed without actual transaction
         setRecords((prev) =>
           prev.map((r) =>
             r.id === record.id
               ? {
                   ...r,
-                  transactionHash: mockTxHash,
-                  blockNumber: Math.floor(Math.random() * 1000000) + 18000000,
-                  gasUsed: (Math.random() * 0.005 + 0.002).toFixed(6),
                   status: "confirmed" as const,
                 }
               : r,
           ),
         )
 
-        return mockTxHash
+        return "onchain-storage-disabled"
       } catch (error) {
         console.error("Failed to store file:", error)
         setRecords((prev) =>

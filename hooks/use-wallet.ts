@@ -27,7 +27,16 @@ export function useWallet(): WalletApi {
   const [isConnected, setIsConnected] = useState(false)
 
   const hasEthereum = useMemo(() => {
-    return typeof window !== "undefined" && (Boolean((window as any).ethereum) || Boolean((sdk as any)?.wallet))
+    if (typeof window === "undefined") return false
+    
+    // Check for Farcaster Mini App wallet first
+    const miniWallet = (sdk as any)?.wallet?.ethereum
+    if (miniWallet && typeof miniWallet.request === "function") {
+      return true
+    }
+    
+    // Fallback to window.ethereum
+    return Boolean((window as any).ethereum)
   }, [])
 
   const connect = useCallback(async () => {
@@ -35,6 +44,7 @@ export function useWallet(): WalletApi {
       // Prefer Farcaster Mini App wallet if available
       const miniWallet = (sdk as any)?.wallet?.ethereum
       if (miniWallet && typeof miniWallet.request === "function") {
+        console.log("Using Farcaster Mini App wallet")
         const accounts: string[] = await miniWallet.request({ method: "eth_requestAccounts" })
         const addr = accounts?.[0] ?? null
         setAddress(addr)
@@ -42,16 +52,22 @@ export function useWallet(): WalletApi {
         return addr
       }
 
+      // Fallback to window.ethereum
       const ethereum = (window as any).ethereum
       if (ethereum?.request) {
+        console.log("Using window.ethereum")
         const accounts: string[] = await ethereum.request({ method: "eth_requestAccounts" })
         const addr = accounts?.[0] ?? null
         setAddress(addr)
         setIsConnected(Boolean(addr))
         return addr
       }
+      
+      console.warn("No wallet provider found")
     } catch (err) {
       console.error("Wallet connect failed", err)
+      // Show user-friendly error
+      alert("Failed to connect wallet. Please ensure you have a wallet installed and try again.")
     }
     return null
   }, [])
@@ -108,27 +124,35 @@ export function useWallet(): WalletApi {
     // Attempt eager account detection
     ;(async () => {
       try {
+        // Check Farcaster Mini App wallet first
         const miniWallet = (sdk as any)?.wallet?.ethereum
         if (miniWallet?.request) {
+          console.log("Checking Farcaster Mini App wallet for existing accounts")
           const accounts: string[] = await miniWallet.request({ method: "eth_accounts" })
           const addr = accounts?.[0] ?? null
           if (addr) {
+            console.log("Found existing account in Mini App wallet:", addr)
             setAddress(addr)
             setIsConnected(true)
             return
           }
         }
+        
+        // Fallback to window.ethereum
         const ethereum = (window as any).ethereum
         if (ethereum?.request) {
+          console.log("Checking window.ethereum for existing accounts")
           const accounts: string[] = await ethereum.request({ method: "eth_accounts" })
           const addr = accounts?.[0] ?? null
           if (addr) {
+            console.log("Found existing account in window.ethereum:", addr)
             setAddress(addr)
             setIsConnected(true)
           }
         }
-      } catch {
-        // ignore
+      } catch (err) {
+        console.log("No existing wallet connection found:", err)
+        // This is normal for new users
       }
     })()
   }, [])

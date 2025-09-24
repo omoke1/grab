@@ -54,30 +54,24 @@ export function PostTracker() {
         await sendUsdcTransfer(APP_CONFIG.usdcAddress, APP_CONFIG.recipient, APP_CONFIG.prices.usdcUnits)
       }
 
-      // Simulate API call to analyze post
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // TODO: Implement real Farcaster API integration
+      // For now, show empty state
+      await new Promise((resolve) => setTimeout(resolve, 1000))
     } catch (err) {
       console.error("Analysis payment failed", err)
       setIsAnalyzing(false)
       return
     }
 
-    // Mock analytics data
-    const mockAnalytics: PostAnalytics = {
-      likes: 42,
-      comments: 18,
-      recasts: 23,
-      engagementRate: 12.5,
-      mutualInteractions: [
-        { username: "alice.eth", wallet: "0x1234...5678", interactions: ["like", "recast"] },
-        { username: "bob.base", wallet: "0x9876...4321", interactions: ["comment"] },
-        { username: "charlie.fc", wallet: "0x5555...7777", interactions: ["like"] },
-        { username: "diana.warpcast", wallet: "0x3333...9999", interactions: ["like", "comment", "recast"] },
-        { username: "eve.farcaster", wallet: "0x7777...1111", interactions: ["recast"] },
-      ],
-    }
-
-    setAnalytics(mockAnalytics)
+    // TODO: Implement real Farcaster API integration
+    // For now, show empty state
+    setAnalytics({
+      likes: 0,
+      comments: 0,
+      recasts: 0,
+      engagementRate: 0,
+      mutualInteractions: [],
+    })
     setIsAnalyzing(false)
   }
 

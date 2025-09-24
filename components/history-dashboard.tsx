@@ -49,46 +49,6 @@ export function HistoryDashboard() {
         timestamp: new Date(item.timestamp),
       }))
       setDownloadHistory(history)
-    } else {
-      // Generate some mock data for demonstration
-      const mockHistory: DownloadRecord[] = [
-        {
-          id: "1",
-          url: "https://warpcast.com/dwr/0x12345",
-          title: "Amazing Base Chain Demo",
-          timestamp: new Date(Date.now() - 86400000), // 1 day ago
-          status: "completed",
-          paymentAmount: "0.0005 ETH",
-          transactionHash: "0xabcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234",
-          receipt: "receipt-001",
-          creatorName: "Dan Romero",
-          creatorHandle: "dwr",
-        },
-        {
-          id: "2",
-          url: "https://base.app/jessepollak/0x67890",
-          title: "Onchain Summer Highlights",
-          timestamp: new Date(Date.now() - 172800000), // 2 days ago
-          status: "completed",
-          paymentAmount: "0.50 USDC",
-          transactionHash: "0xefgh5678901234efgh5678901234efgh5678901234efgh5678901234efgh5678",
-          receipt: "receipt-002",
-          creatorName: "Jesse Pollak",
-          creatorHandle: "jessepollak",
-        },
-        {
-          id: "3",
-          url: "https://warpcast.com/vitalik/0xabcdef",
-          title: "Ethereum Roadmap Update",
-          timestamp: new Date(Date.now() - 259200000), // 3 days ago
-          status: "error",
-          paymentAmount: "0.0005 ETH",
-          creatorName: "Vitalik Buterin",
-          creatorHandle: "vitalik",
-        },
-      ]
-      setDownloadHistory(mockHistory)
-      localStorage.setItem("grab-download-history", JSON.stringify(mockHistory))
     }
   }, [])
 
