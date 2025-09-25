@@ -14,6 +14,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/.well-known/farcaster.json",
+        headers: [
+          { key: "Content-Type", value: "application/json; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=300" },
+        ],
+      },
+      {
         source: "/.well-known/miniapp.json",
         headers: [
           { key: "Cache-Control", value: "public, max-age=300" },
