@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Download, ExternalLink, CheckCircle, AlertCircle, DollarSign, Receipt } from "lucide-react"
 import { useWallet } from "@/hooks/use-wallet"
-import { OnchainKitWalletButton } from "@/components/onchainkit-wallet-button"
 import { APP_CONFIG } from "@/lib/config"
 
 interface DownloadItem {
@@ -213,9 +212,8 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
               </div>
 
               {!isConnected && (
-                <div className="neo-border bg-yellow text-black p-3 md:p-4 rounded-lg text-center space-y-3">
-                  <p className="font-bold text-sm md:text-base">⚠️ Connect your wallet to download videos</p>
-                  <OnchainKitWalletButton />
+                <div className="neo-border bg-yellow text-black p-3 md:p-4 rounded-lg text-center">
+                  <p className="font-bold text-sm md:text-base">⚠️ Connect your wallet using the top-right button</p>
                 </div>
               )}
             </>
