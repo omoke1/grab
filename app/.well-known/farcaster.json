@@ -1,0 +1,36 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "baseBuilder": {
+    "allowedAddresses": [
+      "0x29DC76fb853b321b4e4e9e09d89290A7D8E32584"
+    ]
+  },
+  "frame": {
+    "version": "1",
+    "name": "Grab",
+    "homeUrl": "https://grab-rust.vercel.app",
+    "iconUrl": "https://grab-rust.vercel.app/placeholder-logo.png",
+    "splashImageUrl": "https://grab-rust.vercel.app/placeholder-logo.png",
+    "splashBackgroundColor": "#000000",
+    "webhookUrl": "https://grab-rust.vercel.app/api/webhook",
+    "subtitle": "Download videos & onchain analytics",
+    "description": "Download videos from Farcaster casts and track usage onchain.",
+    "screenshotUrls": [
+      "https://grab-rust.vercel.app/placeholder.jpg"
+    ],
+    "primaryCategory": "utility",
+    "tags": ["video", "analytics", "farcaster"],
+    "heroImageUrl": "https://grab-rust.vercel.app/placeholder.jpg",
+    "tagline": "Grab videos. Pay on Base.",
+    "ogTitle": "Grab Mini App",
+    "ogDescription": "Download Farcaster videos & pay on Base.",
+    "ogImageUrl": "https://grab-rust.vercel.app/placeholder.jpg",
+    "noindex": false,
+    "requiredChains": ["eip155:8453"]
+  }
+}
+

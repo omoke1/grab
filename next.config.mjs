@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Use a local distDir to reduce OneDrive file locking issues during dev
+  distDir: ".next",
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, Heart, MessageCircle, Repeat2, TrendingUp, Download, ExternalLink, User } from "lucide-react"
 import { useWallet } from "@/hooks/use-wallet"
+import { OnchainKitWalletButton } from "@/components/onchainkit-wallet-button"
 import { APP_CONFIG } from "@/lib/config"
 
 interface PostAnalytics {

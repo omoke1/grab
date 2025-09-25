@@ -302,7 +302,7 @@ export function AnalyticsDashboard({ isConnected, onConnect }: AnalyticsDashboar
                       {session.startTime.toLocaleTimeString()} - {session.endTime?.toLocaleTimeString()}
                     </span>
                   </div>
-                </div>
+                  </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-xs md:text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Download, ExternalLink, CheckCircle, AlertCircle, DollarSign, Receipt } from "lucide-react"
 import { useWallet } from "@/hooks/use-wallet"
+import { OnchainKitWalletButton } from "@/components/onchainkit-wallet-button"
 import { APP_CONFIG } from "@/lib/config"
 
 interface DownloadItem {
@@ -138,12 +139,28 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
   }
 
   const isValidCastUrl = (url: string): boolean => {
-    const patterns = [
-      /^https:\/\/warpcast\.com\/[\w-]+\/0x[a-fA-F0-9]+$/,
-      /^https:\/\/supercast\.xyz\/[\w-]+\/0x[a-fA-F0-9]+$/,
-      /^https:\/\/base\.app\/[\w-]+\/0x[a-fA-F0-9]+$/,
-    ]
-    return patterns.some((pattern) => pattern.test(url))
+    try {
+      const urlObj = new URL(url)
+      const validHosts = [
+        'warpcast.com',
+        'supercast.xyz', 
+        'base.app',
+        'farcaster.xyz',
+        'farcaster.com'
+      ]
+      
+      // Check if it's a valid Farcaster-related URL
+      const isValidHost = validHosts.some(host => 
+        urlObj.hostname === host || urlObj.hostname.endsWith(`.${host}`)
+      )
+      
+      // Also accept any URL that contains common Farcaster patterns
+      const hasFarcasterPattern = /(cast|farcaster|warpcast|supercast)/i.test(url)
+      
+      return isValidHost || hasFarcasterPattern
+    } catch {
+      return false
+    }
   }
 
   const getStatusIcon = (status: DownloadItem["status"]) => {
@@ -196,8 +213,9 @@ export function VideoDownloader({ onDownload, downloads = [] }: VideoDownloaderP
               </div>
 
               {!isConnected && (
-                <div className="neo-border bg-yellow text-black p-3 md:p-4 rounded-lg">
+                <div className="neo-border bg-yellow text-black p-3 md:p-4 rounded-lg text-center space-y-3">
                   <p className="font-bold text-sm md:text-base">⚠️ Connect your wallet to download videos</p>
+                  <OnchainKitWalletButton />
                 </div>
               )}
             </>
