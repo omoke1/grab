@@ -20,11 +20,40 @@ type WalletApi = {
   sendUsdcTransfer: (token: Hex, to: Hex, amountUnits: bigint) => Promise<Hex>
   hasEthereum: boolean
   ensureBaseChain: () => Promise<void>
+  profile: {
+    address: string | null
+    fid: number | null
+    username: string | null
+    pfpUrl: string | null
+  }
 }
 
 export function useWallet(): WalletApi {
   const [address, setAddress] = useState<string | null>(null)
   const [isConnected, setIsConnected] = useState(false)
+  const [fid, setFid] = useState<number | null>(null)
+  const [username, setUsername] = useState<string | null>(null)
+  const [pfpUrl, setPfpUrl] = useState<string | null>(null)
+
+  const tryLoadMiniAppProfile = useCallback(async () => {
+    try {
+      const maybeSdk: any = sdk as any
+      const userCtx =
+        maybeSdk?.user ||
+        maybeSdk?.session?.user ||
+        maybeSdk?.context?.user ||
+        maybeSdk?.context?.viewer || null
+
+      if (userCtx) {
+        if (typeof userCtx.fid === "number") setFid(userCtx.fid)
+        if (typeof userCtx.username === "string") setUsername(userCtx.username)
+        if (typeof userCtx.pfpUrl === "string") setPfpUrl(userCtx.pfpUrl)
+        if (typeof userCtx.pfp === "string" && !pfpUrl) setPfpUrl(userCtx.pfp)
+      }
+    } catch (_) {
+      // best-effort only
+    }
+  }, [pfpUrl])
 
   const hasEthereum = useMemo(() => {
     if (typeof window === "undefined") return false
@@ -49,6 +78,7 @@ export function useWallet(): WalletApi {
         const addr = accounts?.[0] ?? null
         setAddress(addr)
         setIsConnected(Boolean(addr))
+        await tryLoadMiniAppProfile()
         return addr
       }
 
@@ -60,6 +90,7 @@ export function useWallet(): WalletApi {
         const addr = accounts?.[0] ?? null
         setAddress(addr)
         setIsConnected(Boolean(addr))
+        await tryLoadMiniAppProfile()
         return addr
       }
       
@@ -134,6 +165,7 @@ export function useWallet(): WalletApi {
             console.log("Found existing account in Mini App wallet:", addr)
             setAddress(addr)
             setIsConnected(true)
+            await tryLoadMiniAppProfile()
             return
           }
         }
@@ -148,6 +180,7 @@ export function useWallet(): WalletApi {
             console.log("Found existing account in window.ethereum:", addr)
             setAddress(addr)
             setIsConnected(true)
+            await tryLoadMiniAppProfile()
           }
         }
       } catch (err) {
@@ -155,9 +188,23 @@ export function useWallet(): WalletApi {
         // This is normal for new users
       }
     })()
-  }, [])
+  }, [tryLoadMiniAppProfile])
 
-  return { connect, address, isConnected, sendTransaction, sendUsdcTransfer, hasEthereum, ensureBaseChain }
+  return {
+    connect,
+    address,
+    isConnected,
+    sendTransaction,
+    sendUsdcTransfer,
+    hasEthereum,
+    ensureBaseChain,
+    profile: {
+      address,
+      fid,
+      username,
+      pfpUrl,
+    },
+  }
 }
 
 
