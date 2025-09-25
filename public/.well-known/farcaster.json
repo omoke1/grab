@@ -6,7 +6,6 @@
   },
   "baseBuilder": {
     "allowedAddresses": [
-      "0x29DC76fb853b321b4e4e9e09d89290A7D8E32584",
       "0x28ad44b9AfaD841554bced83642Cf2B2B3e9CC14"
     ]
   },
